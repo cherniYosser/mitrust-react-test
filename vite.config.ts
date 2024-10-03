@@ -10,4 +10,13 @@ export default defineConfig({
     globals: true,
     setupFiles: "./src/tests/setup.ts",
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://app.m-itrust.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

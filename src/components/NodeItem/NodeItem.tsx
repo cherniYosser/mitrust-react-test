@@ -1,11 +1,10 @@
 import { useState, type JSX, type SyntheticEvent } from "react";
 import { isObject } from "../../utils/appUtils";
 import { Wrapper } from "./NodeItem.styles";
-import { NodeType } from "../../type/claimsType";
 
 type NodeItemType = {
   name: any;
-  node: NodeType;
+  node: any;
 };
 
 const NodeItem = ({ name, node }: NodeItemType): JSX.Element => {
@@ -28,7 +27,6 @@ const NodeItem = ({ name, node }: NodeItemType): JSX.Element => {
             ))}
           </ul>
         ) : (
-          // @ts-ignore
           <div className="leaf-node">{node}</div>
         )}
       </details>

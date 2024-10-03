@@ -7,9 +7,9 @@ export type InputProps = {
   error?: string;
   hasError?: boolean;
   label?: string;
-  onBlur?: (value: string, props: { [key: string]: string }) => void;
-  onChange?: (value: string, props: { [key: string]: string }) => void;
-  onFocus?: (value: string, props: { [key: string]: string }) => void;
+  onBlur?: (value: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (value: ChangeEvent<HTMLInputElement>) => void;
   props?: { [key: string]: string };
 } & Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -28,19 +28,19 @@ const Input = ({
   props = {},
   ...restProps
 }: InputProps): JSX.Element => {
-  const handleFocus = (event: FocusEvent<HTMLInputElement>): void => {
-    if (typeof onFocus === "function") {
-      onFocus(event.target.value, props);
-    }
-  };
-  const handleBlur = (event: FocusEvent<HTMLInputElement>): void => {
-    if (typeof onBlur === "function") {
-      onBlur(event.target.value, props);
-    }
-  };
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (typeof onChange === "function") {
-      onChange(event.target.value, props);
+      onChange(event);
+    }
+  };
+  const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (typeof onBlur === "function") {
+      onBlur(event);
+    }
+  };
+  const handleFocus = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (typeof onFocus === "function") {
+      onFocus(event);
     }
   };
   return (

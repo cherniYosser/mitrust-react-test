@@ -1,5 +1,3 @@
-import { config } from "../config/config";
-
 export async function getFetchQuery(url: string): Promise<any> {
   const headers = new Headers({
     Accept: "application/json, charset=utf-8",
@@ -9,7 +7,7 @@ export async function getFetchQuery(url: string): Promise<any> {
     headers,
     method: "GET",
   };
-  const req = new Request(`${config.API_ROOT}/${url}`, init);
+  const req = new Request(`${url}`, init);
 
   const response = await fetch(req, init);
   if (response.ok) {

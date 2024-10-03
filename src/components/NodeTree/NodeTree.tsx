@@ -1,10 +1,11 @@
-import { type JSX, useMemo, useState } from "react";
+import { ChangeEvent, type JSX, useMemo, useState } from "react";
 import useClaims from "../../utils/useClaims";
-import NodeItem from "../NodeItem/NodeItem";
-import Spinner from "../spinner/Spinner";
-import { Wrapper } from "./NodeTree.styles";
-import Input from "../Input/Input";
 import { filterRecursiveNodes } from "../../utils/appUtils";
+
+import NodeItem from "../NodeItem/NodeItem";
+import Spinner from "../../commons/spinner/Spinner";
+import Input from "../../commons/Input/Input";
+import { Wrapper } from "./NodeTree.styles";
 
 const NodeTree = (): JSX.Element => {
   const [searchText, setSearchText] = useState("");
@@ -16,8 +17,8 @@ const NodeTree = (): JSX.Element => {
     return filterRecursiveNodes(claimsList, searchText);
   }, [claimsList, searchText]);
 
-  const handleSearch = (value: string): void => {
-    setSearchText(value);
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
+    setSearchText(event.target.value);
   };
 
   return (
@@ -38,15 +39,15 @@ const NodeTree = (): JSX.Element => {
               <div key={key} className="node-card">
                 <h2>{key}</h2>
                 <ul>
-                  {Object.entries(nodes).map(([nodeKey, node]) => (
-                    <NodeItem
-                      key={nodeKey}
-                      // @ts-ignore
-                      name={(node.marker && `Item- ${nodeKey}`) || nodeKey}
-                      // @ts-ignore
-                      node={node}
-                    />
-                  ))}
+                  {Object.entries(nodes).map(
+                    ([nodeKey, node]: [string, any]) => (
+                      <NodeItem
+                        key={nodeKey}
+                        name={(node.marker && `Item- ${nodeKey}`) || nodeKey}
+                        node={node}
+                      />
+                    )
+                  )}
                 </ul>
               </div>
             ))}

@@ -1,7 +1,6 @@
-import Header from "./components/Header/Header";
-import NodeTree from "./components/NodeTree/NodeTree";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,9 +13,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Header title="Mitrust react test" />
-
-      <NodeTree />
+      <HomePage />
     </QueryClientProvider>
   );
 }
